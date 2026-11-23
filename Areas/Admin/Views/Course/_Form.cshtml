@@ -1,0 +1,97 @@
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Group1Blackboard.Models
+@model Group1Blackboard.Models.Course
+
+@{
+    var action = ViewContext.RouteData.Values["action"]?.ToString();
+}
+
+<form asp-action="@action" method="post" class="admin-validation-form col-xl-9" novalidate>
+    @if (action == "Edit")
+    {
+        <input type="hidden" asp-for="CourseID" />
+    }
+    else
+    {
+        <input type="hidden" name="CourseID" value="0" />
+    }
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+    <p class="text-danger" data-client-validation-summary role="alert" hidden>Please correct the errors below and save again.</p>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="mb-3">
+                <label asp-for="CourseNumber" class="form-label"></label>
+                <input asp-for="CourseNumber" class="form-control" aria-describedby="CourseNumber-error-message" />
+                <span asp-validation-for="CourseNumber" id="CourseNumber-error-message" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="mb-3">
+                <label asp-for="CourseName" class="form-label"></label>
+                <input asp-for="CourseName" class="form-control" aria-describedby="CourseName-error-message" />
+                <span asp-validation-for="CourseName" id="CourseName-error-message" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="mb-3">
+                <label asp-for="Credit" class="form-label"></label>
+                <input asp-for="Credit" class="form-control" aria-describedby="Credit-error-message" step="1" />
+                <span asp-validation-for="Credit" id="Credit-error-message" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-3">
+                <label asp-for="OfferedSemester" class="form-label"></label>
+                <select asp-for="OfferedSemester" asp-items="@(new SelectList(Course.Semesters))" class="form-select" aria-describedby="OfferedSemester-error-message">
+                    <option value="">-- Select a semester --</option>
+                </select>
+                <span asp-validation-for="OfferedSemester" id="OfferedSemester-error-message" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-3">
+                <label asp-for="Location" class="form-label"></label>
+                <select asp-for="Location" asp-items="@(new SelectList(Course.Locations))" class="form-select" aria-describedby="Location-error-message">
+                    <option value="">-- Select a location --</option>
+                </select>
+                <span asp-validation-for="Location" id="Location-error-message" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label asp-for="Times" class="form-label"></label>
+                <input asp-for="Times" class="form-control" aria-describedby="Times-error-message" placeholder="e.g. M/W 1:30 PM - 2:45 PM" />
+                <span asp-validation-for="Times" id="Times-error-message" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label asp-for="InstructorID" class="form-label"></label>
+                <select asp-for="InstructorID" asp-items="ViewBag.Instructors" class="form-select" aria-describedby="InstructorID-error-message">
+                    <option value="">-- Select an instructor --</option>
+                </select>
+                <span asp-validation-for="InstructorID" id="InstructorID-error-message" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="MajorID" class="form-label"></label>
+        <select asp-for="MajorID" asp-items="ViewBag.Majors" class="form-select" aria-describedby="MajorID-error-message">
+            <option value="">-- Select a major --</option>
+        </select>
+        <span asp-validation-for="MajorID" id="MajorID-error-message" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ShortDescription" class="form-label"></label>
+        <textarea asp-for="ShortDescription" class="form-control" rows="3" aria-describedby="ShortDescription-error-message"></textarea>
+        <span asp-validation-for="ShortDescription" id="ShortDescription-error-message" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>

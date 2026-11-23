@@ -29,3 +29,23 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.admin-validation-form .input-validation-error {
+  border-color: var(--bs-danger);
+  background-color: #fff3e0;
+}
+
+.admin-validation-form .validation-summary-valid,
+.admin-validation-form .field-validation-valid {
+  display: none;
+}
+
+.admin-validation-form .validation-summary-errors ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.admin-validation-form .field-validation-error {
+  display: block;
+  margin-top: 0.25rem;
+}

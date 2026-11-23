@@ -23,6 +23,13 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     base.OnModelCreating(modelBuilder);
 
+    // Admin forms require an instructor, but existing courses can be unassigned.
+    modelBuilder.Entity<Course>()
+        .HasOne(course => course.Instructor)
+        .WithMany(instructor => instructor.Courses)
+        .HasForeignKey(course => course.InstructorID)
+        .IsRequired(false);
+
     modelBuilder.Entity<Major>().HasData(
         new Major
         {

@@ -1,56 +1,8 @@
-
 @model Group1Blackboard.Models.AppUser
 
 @{
     ViewData["Title"] = "Edit User";
 }
 
-<h2>Edit User</h2>
-
-<form asp-area="Admin" asp-controller="User"
-      asp-action="Edit" method="post">
-
-    <input type="hidden" asp-for="AppUserID" />
-
-    <div asp-validation-summary="All" class="text-danger"></div>
-
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label"></label>
-        <input asp-for="Name" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="DOB" class="form-label">Date of Birth</label>
-        <input asp-for="DOB" type="date" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label"></label>
-        <input asp-for="Email" type="email" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="SSN" class="form-label">SSN</label>
-        <input asp-for="SSN" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Role" class="form-label"></label>
-        
-<select asp-for="Role"
-        asp-items="@(new Microsoft.AspNetCore.Mvc.Rendering.SelectList(Group1Blackboard.Models.AppUser.Roles))"
-        class="form-select">
-    <option value="">Select Role</option>
-</select>
-
-    </div>
-
-    <button type="submit" class="btn btn-primary">
-        Save Changes
-    </button>
-
-    <a asp-area="Admin" asp-controller="User"
-       asp-action="Index" class="btn btn-secondary">
-        Cancel
-    </a>
-</form>
+<h2>@ViewData["Title"]</h2>
+<partial name="_Form" model="Model" />
